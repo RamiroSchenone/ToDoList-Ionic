@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TareasService } from 'src/app/services/tareas.service';
+import { TaskService } from 'src/app/services/task.service';
 
 @Component({
   selector: 'app-finished-tab',
@@ -9,7 +9,7 @@ import { TareasService } from 'src/app/services/tareas.service';
 export class FinishedTabPage {
 
   constructor(
-    private tareasService: TareasService
+    private taskService: TaskService
   ) {}
 
 }

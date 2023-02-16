@@ -6,8 +6,13 @@
 
 <ion-content [fullscreen]="true">
   <ion-list>
-    <ion-item *ngFor="let tarea of tareasService.listaTareas" detail>
-      <ion-label>{{tarea.titulo}}</ion-label>
+    <ion-item *ngFor="let task of taskService.taskList" detail>
+      <ion-label>{{task.title}}</ion-label>
     </ion-item>
   </ion-list>
+    <ion-fab slot="fixed" horizontal="end" vertical="bottom">
+      <ion-fab-button (click)="onAddTaskClick()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
 </ion-content>
