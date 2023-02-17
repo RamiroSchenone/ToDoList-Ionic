@@ -19,7 +19,7 @@ export class PendingTabPage {
 
   async onAddTaskClick() {
     const alert = await this.alertController.create({
-      header: 'Title of yout to-do list',
+      header: 'Title of your to-do list',
       inputs: [
         {
           name: 'title',

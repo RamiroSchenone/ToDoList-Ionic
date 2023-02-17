@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { IonInput } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
+import { AlertController, IonInput } from '@ionic/angular';
 import { TaskItem } from 'src/app/models/task-item.model';
 import { TaskService } from 'src/app/services/task.service';
 
@@ -18,7 +18,7 @@ export class AddTaskPage implements OnInit {
   constructor(
     private taskService: TaskService,
     private route: ActivatedRoute,
-    private router: Router
+    private alertController: AlertController
   ) {
     const taskId = this.route.snapshot.paramMap.get('taskId');
     if (taskId) {
@@ -50,6 +50,7 @@ export class AddTaskPage implements OnInit {
       this.task.endDate = null;
     }
     this.taskService.setTaskListOnLocalStorage();
+    console.log(this.taskService.taskList);
   }
 
   deleteItemList(i: number) {
@@ -57,7 +58,35 @@ export class AddTaskPage implements OnInit {
     this.taskService.setTaskListOnLocalStorage();
   }
 
-  onClickOk() {
-    this.router.navigate([`/`]);
+  async editItemListName(i: number) {
+    var taskItemToEdit = this.task.items[i];
+    const alert = await this.alertController.create({
+      header: 'Edit Description',
+      inputs: [
+        {
+          name: 'description',
+          type: 'text',
+          value: taskItemToEdit.description,
+          placeholder: 'Description',
+        },
+      ],
+      buttons: [
+        {
+          text: 'EDIT',
+          handler: (data) => {
+            if (data.description.length === 0) {
+              return;
+            }
+            this.taskService.editTaskItemList(this.task, i, data.description);
+          },
+        },
+        {
+          text: 'CANCEL',
+          role: 'cancel',
+          handler: (data) => {},
+        },
+      ],
+    });
+    await alert.present();
   }
 }

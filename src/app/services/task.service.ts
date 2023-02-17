@@ -9,11 +9,23 @@ export class TaskService {
 
   constructor() {}
 
+  editTaskItemList(task: Task, i: number, newDescription: string){
+    var taskItemToEdit = task.items[i];
+    taskItemToEdit ? (taskItemToEdit.description = newDescription) : null;
+    this.setTaskListOnLocalStorage();
+  }
+
   createTask(title: string) {
     const newTask = new Task(title);
     this.taskList.push(newTask);
     this.setTaskListOnLocalStorage();
     return newTask.id;
+  }
+
+  editTask(title: string, id: number) {
+    var taskToEdit = this.taskList.find((task) => task.id === id);
+    taskToEdit ? (taskToEdit.title = title) : null;
+    this.setTaskListOnLocalStorage();
   }
 
   getTask(id: string | number) {
