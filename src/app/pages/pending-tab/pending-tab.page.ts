@@ -50,14 +50,4 @@ export class PendingTabPage {
     });
     await alert.present();
   }
-
-  editTask(task: any){
-    const newTaskId = +task.id;
-    this.router.navigate([`tabs/pending-tab/add-task/${newTaskId}`]);
-  }
-
-  deleteTask(i: number){
-    this.taskService.taskList.splice(i, 1);
-    this.taskService.setTaskListOnLocalStorage();
-  }
 }

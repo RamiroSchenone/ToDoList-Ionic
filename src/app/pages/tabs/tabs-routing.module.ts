@@ -28,10 +28,22 @@ const routes: Routes = [
       },
       {
         path: 'finished-tab',
-        loadChildren: () =>
-          import('../finished-tab/finished-tab.module').then(
-            (m) => m.FinishedTabPageModule
-          ),
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../finished-tab/finished-tab.module').then(
+                (m) => m.FinishedTabPageModule
+              ),
+          },
+          {
+            path: 'add-task/:taskId',
+            loadChildren: () =>
+              import('../add-task/add-task.module').then(
+                (m) => m.AddTaskPageModule
+              ),
+          },
+        ],
       },
       {
         path: '',
