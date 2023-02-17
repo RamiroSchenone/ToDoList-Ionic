@@ -3,6 +3,7 @@ import { Task } from '../models/task.model';
 
 @Pipe({
   name: 'filterComplete',
+  pure: false,
 })
 export class FilterCompletePipe implements PipeTransform {
   transform(tasks: Task[], tasksCompleted: boolean = true): Task[] {

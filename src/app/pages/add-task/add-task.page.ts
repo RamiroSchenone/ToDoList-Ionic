@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, IonInput } from '@ionic/angular';
 import { TaskItem } from 'src/app/models/task-item.model';
 import { TaskService } from 'src/app/services/task.service';
@@ -18,7 +18,8 @@ export class AddTaskPage implements OnInit {
   constructor(
     private taskService: TaskService,
     private route: ActivatedRoute,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private router: Router
   ) {
     const taskId = this.route.snapshot.paramMap.get('taskId');
     if (taskId) {
@@ -50,12 +51,15 @@ export class AddTaskPage implements OnInit {
       this.task.endDate = null;
     }
     this.taskService.setTaskListOnLocalStorage();
-    console.log(this.taskService.taskList);
   }
 
   deleteItemList(i: number) {
     this.task.items.splice(i, 1);
     this.taskService.setTaskListOnLocalStorage();
+  }
+
+  onClickOk() {
+    this.router.navigate([`/`]);
   }
 
   async editItemListName(i: number) {

@@ -29,13 +29,32 @@ export class TaskComponent implements OnInit {
     }
   }
 
-  deleteTask(i: number) {
-    this.taskService.taskList.splice(i, 1);
-    this.taskService.setTaskListOnLocalStorage();
+  async deleteTask(id: number) {
+    const alert = await this.alertController.create({
+      header: 'Delete task',
+      message: 'Are you sure you want to delete this task?',
+      buttons: [
+        {
+          text: 'CONFIRM',
+          handler: () => {
+            this.taskService.deleteTask(id);
+          },
+        },
+        {
+          text: 'CANCEL',
+          role: 'cancel',
+        },
+      ],
+    });
+    await alert.present();
   }
 
-  async editTaskName(i: number) {
-    var taskToEdit = this.taskService.taskList[i];
+  async editTaskName(id: number) {
+    var taskToEdit = this.taskService.taskList.find(task => task.id === id);
+    if(taskToEdit == undefined) {
+      return;
+    }
+    const taskToEditId = taskToEdit.id;
     const alert = await this.alertController.create({
       header: 'Edit Title',
       inputs: [
@@ -53,7 +72,7 @@ export class TaskComponent implements OnInit {
             if (data.title.length === 0) {
               return;
             }
-            this.taskService.editTask(data.title, +taskToEdit.id);
+            this.taskService.editTask(data.title, taskToEditId);
           },
         },
         {

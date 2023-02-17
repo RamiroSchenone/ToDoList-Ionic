@@ -16,7 +16,7 @@
       <ion-item-option color="primary">
         <ion-icon
           slot="icon-only"
-          (click)="editTaskName(i)"
+          (click)="editTaskName(task.id)"
           name="create"
         ></ion-icon>
       </ion-item-option>
@@ -25,7 +25,7 @@
       <ion-item-option color="danger">
         <ion-icon
           slot="icon-only"
-          (click)="deleteTask(i)"
+          (click)="deleteTask(task.id)"
           name="trash"
         ></ion-icon>
       </ion-item-option>

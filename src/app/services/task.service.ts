@@ -9,7 +9,7 @@ export class TaskService {
 
   constructor() {}
 
-  editTaskItemList(task: Task, i: number, newDescription: string){
+  editTaskItemList(task: Task, i: number, newDescription: string) {
     var taskItemToEdit = task.items[i];
     taskItemToEdit ? (taskItemToEdit.description = newDescription) : null;
     this.setTaskListOnLocalStorage();
@@ -28,6 +28,11 @@ export class TaskService {
     this.setTaskListOnLocalStorage();
   }
 
+  deleteTask(id: number) {
+    this.taskList = this.taskList.filter(task => task.id != id);
+    this.setTaskListOnLocalStorage();
+  }
+
   getTask(id: string | number) {
     id = +id;
     this.getTaskListOnLocalStorage();
@@ -39,9 +44,6 @@ export class TaskService {
   }
 
   setTaskListOnLocalStorage() {
-    if (this.taskList.length === 0) {
-      this.getTaskListOnLocalStorage();
-    }
     localStorage.setItem('tasksList', JSON.stringify(this.taskList));
   }
 
