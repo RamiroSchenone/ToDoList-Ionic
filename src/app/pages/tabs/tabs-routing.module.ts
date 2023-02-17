@@ -8,25 +8,43 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'earrings-tab',
-        loadChildren: () => import('../earrings-tab/earrings-tab.module').then(m => m.EarringsTabPageModule)
+        path: 'pending-tab',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../pending-tab/pending-tab.module').then(
+                (m) => m.PendingTabPageModule
+              ),
+          },
+          {
+            path: 'add-task/:taskId',
+            loadChildren: () =>
+              import('../add-task/add-task.module').then(
+                (m) => m.AddTaskPageModule
+              ),
+          },
+        ],
       },
       {
         path: 'finished-tab',
-        loadChildren: () => import('../finished-tab/finished-tab.module').then(m => m.FinishedTabPageModule)
+        loadChildren: () =>
+          import('../finished-tab/finished-tab.module').then(
+            (m) => m.FinishedTabPageModule
+          ),
       },
       {
         path: '',
-        redirectTo: '/tabs/earrings-tab',
-        pathMatch: 'full'
-      }
-    ]
+        redirectTo: '/tabs/pending-tab',
+        pathMatch: 'full',
+      },
+    ],
   },
   {
     path: '',
-    redirectTo: '/tabs/earrings-tab',
-    pathMatch: 'full'
-  }
+    redirectTo: '/tabs/pending-tab',
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({

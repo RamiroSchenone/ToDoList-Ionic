@@ -4,16 +4,15 @@ export class Task {
   id: number;
   title: string;
   creationDate: Date;
-  endDate: Date;
+  endDate?: Date;
   statusComplete: boolean;
-  tasks: TaskItem[];
+  items: TaskItem[];
 
-  constructor(titulo: string, fechaFin: Date) {
+  constructor(titulo: string) {
     this.id = new Date().getTime();
     this.title = titulo;
     this.creationDate = new Date();
-    this.endDate = fechaFin;
     this.statusComplete = false;
-    this.tasks = [];
+    this.items = [];
   }
 }

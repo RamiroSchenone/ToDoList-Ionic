@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EarringsTabPage } from './earrings-tab.page';
+import { PendingTabPage } from './pending-tab.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: EarringsTabPage,
+    component: PendingTabPage,
   },
   {
     path: 'add-task',
@@ -17,4 +17,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class EarringsTabPageRoutingModule {}
+export class PendingTabPageRoutingModule {}

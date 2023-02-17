@@ -2,17 +2,17 @@ import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { EarringsTabPage } from './earrings-tab.page';
+import { PendingTabPage } from './pending-tab.page';
 
-import { EarringsTabPageRoutingModule } from './earrings-tab-routing.module';
+import { PendingTabPageRoutingModule } from './pending-tab-routing.module';
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    EarringsTabPageRoutingModule
+    PendingTabPageRoutingModule
   ],
-  declarations: [EarringsTabPage]
+  declarations: [PendingTabPage]
 })
-export class EarringsTabPageModule {}
+export class PendingTabPageModule {}
