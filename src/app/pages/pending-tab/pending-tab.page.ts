@@ -31,7 +31,6 @@ export class PendingTabPage {
         {
           text: 'ADD',
           handler: (data) => {
-            console.log(data);
             if (data.title.length === 0) {
               return;
             }
@@ -43,7 +42,6 @@ export class PendingTabPage {
           text: 'CANCEL',
           role: 'cancel',
           handler: (data) => {
-            console.log('Cancelar');
           },
         },
       ],

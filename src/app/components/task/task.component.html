@@ -1,7 +1,7 @@
 <ion-list *ngIf="taskService.taskList.length > 0">
   <ion-item-sliding
     class="animated fadeInDown"
-    *ngFor="let task of taskService.taskList; let i = index"
+    *ngFor="let task of taskService.taskList | filterComplete: pendingPage; let i = index" 
   >
     <ion-item (click)="editTask(task)" detail>
       <ion-label>{{task.title}}</ion-label>

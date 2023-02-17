@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IonInput } from '@ionic/angular';
 import { TaskItem } from 'src/app/models/task-item.model';
 import { TaskService } from 'src/app/services/task.service';
@@ -15,11 +15,14 @@ export class AddTaskPage implements OnInit {
 
   @ViewChild('ionInputNewTask') ionInputNewTask?: IonInput;
 
-  constructor(private taskService: TaskService, private route: ActivatedRoute) {
+  constructor(
+    private taskService: TaskService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
     const taskId = this.route.snapshot.paramMap.get('taskId');
     if (taskId) {
       this.task = this.taskService.getTask(taskId);
-      console.log(this.task);
     }
   }
 
@@ -37,21 +40,24 @@ export class AddTaskPage implements OnInit {
     }
   }
 
-  checkChange(item: TaskItem){
+  checkChange(item: TaskItem) {
     const pending = this.task.items.filter((item: any) => !item.status).length;
-    if(pending === 0){
+    if (pending === 0) {
       this.task.statusComplete = true;
       this.task.endDate = new Date();
-    }else{
+    } else {
       this.task.statusComplete = false;
       this.task.endDate = null;
     }
     this.taskService.setTaskListOnLocalStorage();
-    console.log(this.taskService.taskList);
   }
 
-  deleteItemList(i: number){
+  deleteItemList(i: number) {
     this.task.items.splice(i, 1);
     this.taskService.setTaskListOnLocalStorage();
+  }
+
+  onClickOk() {
+    this.router.navigate([`/`]);
   }
 }
